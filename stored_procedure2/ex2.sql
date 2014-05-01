@@ -15,3 +15,4 @@ DELIMITER ;
 
 set @n = 10;
 CALL SP_TEST1(2, @n);
+SELECT @n;
