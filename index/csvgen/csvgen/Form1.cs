@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using System.Diagnostics;
 using System.IO;
 
 namespace csvgen
@@ -34,16 +34,18 @@ namespace csvgen
         private void timer1_Tick(object sender, EventArgs e)
         {
             progressBar1.Value = value;
-            progressBar1.PerformStep();
+            progressBar1.Update();
 
             if (finish)
             {
-                label1.Text = "finished";
+                label3.Text = "생성완료";
                 progressBar1.Value = 100;
-                progressBar1.PerformStep();                
+                progressBar1.Update();
+                timer1.Enabled = false;
+                string path = Path.GetDirectoryName(saveFileDialog1.FileName);
+                ProcessStartInfo pfi = new ProcessStartInfo("Explorer.exe", path);
+                System.Diagnostics.Process.Start(pfi);               
             }
-            
-
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -55,13 +57,14 @@ namespace csvgen
             len = int.Parse(textBox1.Text);
             if (saveFileDialog1.ShowDialog() != System.Windows.Forms.DialogResult.OK)
                 return;
+            label3.Text = "생성중";
             Task.Factory.StartNew(new Action<Object>(Run), saveFileDialog1.FileName);
         }
         static void Run(Object data)
         {
             Random r = new Random();
-            StreamWriter sw = new StreamWriter((string)data, false, Encoding.GetEncoding("euc-kr"));
-            string[] id = { "apple", "banana", "mac", "window", "toto", "atom" };
+            StreamWriter sw = new StreamWriter((string)data, false);
+            string[] id = { "apple", "banana", "mac", "window", "toto", "atom","isola","dura","popi","heesu" };
             string fn = "김이박정최여러가지성이우리나라에는참만다그래서";
             string mn = "동해물과백두산이마르고이순신이정김삿갓최배달마농뽀뇨크레용신짱";
             int n = len / id.Length;
@@ -75,12 +78,17 @@ namespace csvgen
                     TimeSpan t = TimeSpan.FromSeconds(r.Next(365 * 24 * 60 * 60));
                     DateTime d = DateTime.Now.Subtract(t);
                     string name = "" + fn[r.Next(fn.Length)] + mn[r.Next(mn.Length)] +  mn[r.Next(mn.Length)];
-                    sw.WriteLine(string.Format("{0},{1},{2:yyyy-MM-dd HH:mm:ss},{3},,{4}",str + i,name,d,r.Next(10000) * 1000, 0));
+                    sw.WriteLine(string.Format("{0},{1},{2:yyyy-MM-dd HH:mm:ss},{3},\\N,{4}",
+                        str + i, //id
+                        name,//name
+                        d, //visit
+                        r.Next(10000) * 1000, //money
+                        0 //num trade
+                        ));
                     if (count % step == 0) value++;
                 }
             sw.Close();
-            finish = true;          
-            
+            finish = true;                      
         }
     }
 }

@@ -12,7 +12,7 @@ CREATE TABLE `user` (
   `NAME` varchar(16) DEFAULT NULL,
   `LAST_VISIT` datetime DEFAULT NULL,
   `MONEY` decimal(10,0) DEFAULT NULL,
-  `CHOO` char(8) DEFAULT NULL,
+  `CHOO` char(16) DEFAULT NULL,
   `TRADE_NUM` int(11) DEFAULT NULL,
   PRIMARY KEY (`ID`),
   KEY `CHOO` (`CHOO`),
