@@ -6,3 +6,6 @@ CREATE TABLE auction_user(
 	money INT
 );
 
+LOAD DATA LOCAL INFILE 'auction_user.csv' INTO TABLE auction_user
+	FIELDS TERMINATED BY ',';
+
