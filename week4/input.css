@@ -46,7 +46,6 @@ body {
     font-size: 15px;
 }
 .dark-matter input[type="text"], .dark-matter input[type="email"], .dark-matter textarea, .dark-matter select {
-margin: auto;
     border: none;
     color: #525252;
     height: 30px;
@@ -65,6 +64,13 @@ margin: auto;
     text-align: center;
     font-size: 18px;
 }
+
+.dark-matter input[class="phone"] {
+	width: 31.8%;
+	display: inline-block;
+	margin-left: auto;
+	margin-right: auto;
+} 
 
 .dark-matter select {
     background: #DFDFDF url('down-arrow.png') no-repeat right;
