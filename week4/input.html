@@ -1,30 +1,18 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
-        <link rel="stylesheet" href="style.css" type="text/css">
-        <title> 정호영 박사의 신바람 데이터베이스 수업 </title>
-    </head>
+<html lang="ko">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
-	<body>
-	<!-- form -->
-        <form action="get.jsp"
-              method="post" class="dark-matter" >
-              <h1> 정호영의 데이터베이스
-	              <span>이름과 email을 입력해주세요</span>
-              </h1>
-             <label>
-             <input type="text" name="email" placeholder="honux@naver.com">
-             </label>
-              <label>
-               <input type="text" name="name" placeholder="정호영">
-              </label>
-              
-             <label>
-             <input type="submit" class="button" value="전송하기">
-             </label>
-        </form>
-	<!-- form end -->
-    </body>
+</head>
+<body>
+<h1>Input Form</h1>
+<form action="show.jsp" method="post">
+	<div>이름: <input type="text" name="name"> </div>
+	<p>
+	<div>메시지:<input type="text" name="msg"> </div>
+	<p>
+	<div> <input type="submit"> <input type="reset"> </div> 
+</form>
+</body>
 </html>
 
