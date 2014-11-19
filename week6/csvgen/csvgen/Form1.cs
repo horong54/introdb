@@ -14,7 +14,6 @@ namespace csvgen
 {
     public partial class Form1 : Form
     {
-        static string name;
         static int len;        
         static bool finish = false;
         static int value = 0;
@@ -70,21 +69,19 @@ namespace csvgen
             int n = len / id.Length;
             int step = len / 100;
             int count = 0;
-            sw.WriteLine("id name last money choo num");
+            sw.WriteLine("id,name,last,money,choo");
             foreach (string str in id)
                 for (int i = 0; i < n; i++)
                 {
                     count++;
                     TimeSpan t = TimeSpan.FromSeconds(r.Next(365 * 24 * 60 * 60));
-                    DateTime d = DateTime.Now.Subtract(t);
+                    DateTime dd = DateTime.Now.Subtract(t);
                     string name = "" + fn[r.Next(fn.Length)] + mn[r.Next(mn.Length)] +  mn[r.Next(mn.Length)];
-                    sw.WriteLine(string.Format("{0},{1},{2:yyyy-MM-dd HH:mm:ss},{3},\\N,{4}",
+                    sw.WriteLine(string.Format("{0},{1},{2:yyyy-MM-dd HH:mm:ss},{3},\\N",
                         str + i, //id
                         name,//name
-                        d, //visit
-                        r.Next(10000) * 1000, //money
-                        0 //num trade
-                        ));
+                        dd, //visit
+                        r.Next(10000) * 100)); //money
                     if (count % step == 0) value++;
                 }
             sw.Close();
